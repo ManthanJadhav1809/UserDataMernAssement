@@ -2,7 +2,7 @@ import axios from "axios";
 
 // http://localhost:5000/
 const api = axios.create({
-  baseURL: "https://user-data-mern-assement.vercel.app/",
+  baseURL: "https://user-data-mern-assement-backend.vercel.app/",
 });
 
 api.interceptors.request.use((config) => {
