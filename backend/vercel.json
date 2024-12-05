@@ -8,16 +8,8 @@
   ],
   "routes": [
     {
-      "src": "/api/auth/(.*)",
-      "dest": "/server.js"
-    },
-    {
-      "src": "/api/user/(.*)",
-      "dest": "/server.js"
-    },
-    {
-      "src": "/api/admin/(.*)",
-      "dest": "/server.js"
+      "src": "/api/(.*)",
+      "dest": "server.js"
     }
   ]
 }

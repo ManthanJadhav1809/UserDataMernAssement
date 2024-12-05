@@ -15,28 +15,8 @@ const MONGO_URL = process.env.MONGOURL;
 // Middleware
 app.use(bodyParser.json());
 
+app.use(cors({ origin: "https://user-data-mern-assement-frontend-cl771fa34.vercel.app" }));
 app.use(cors());
-
-// const allowedOrigins = [
-//     "https://user-data-mern-assement-frontend-cl771fa34.vercel.app", // Frontend domain
-// ];
-
-
-// app.use(
-//     cors({
-//         origin: function (origin, callback) {
-//             // Allow requests without origin (like Postman, server-to-server)
-//             if (!origin || allowedOrigins.includes(origin)) {
-//                 callback(null, true);
-//             } else {
-//                 callback(new Error("Not allowed by CORS"));
-//             }
-//         },
-//         methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Explicitly allow required methods
-//         credentials: true, // Allow cookies and Authorization headers
-//         allowedHeaders: "Content-Type,Authorization", // Explicitly allow required headers
-//     })
-// );
 
 // Routes
 app.use('/api/auth', authRoutes);
