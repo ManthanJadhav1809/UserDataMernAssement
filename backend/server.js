@@ -39,9 +39,9 @@ app.use(cors());
 // );
 
 // Routes
-app.use('/auth', authRoutes);
-app.use("/user", userRoutes);
-app.use("/admin",adminRoutes);
+app.use('/api/auth', authRoutes);
+app.use("/api/user", userRoutes);
+app.use("/api/admin",adminRoutes);
 
 // Root Endpoint
 app.get('/', (req, res) => {
