@@ -22,13 +22,16 @@ const allowedOrigins = [
 app.use(
     cors({
         origin: function (origin, callback) {
+            // Allow requests without origin (like Postman, server-to-server)
             if (!origin || allowedOrigins.includes(origin)) {
                 callback(null, true);
             } else {
                 callback(new Error("Not allowed by CORS"));
             }
         },
-        credentials: true, // Support cookies and headers like Authorization
+        methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Explicitly allow required methods
+        credentials: true, // Allow cookies and Authorization headers
+        allowedHeaders: "Content-Type,Authorization", // Explicitly allow required headers
     })
 );
 
