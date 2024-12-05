@@ -12,16 +12,17 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const MONGO_URL = process.env.MONGOURL;
 
-// Middleware
-app.use(bodyParser.json());
 
-app.use(cors({ origin:"https://user-data-mern-assement-frontend-cl771fa34.vercel.app/AdminProfilePage" }));
+app.use(cors({ origin:"https://user-data-mern-assement-frontend.vercel.app/" }));
 app.use(cors());
 
 // Routes
-app.use('/api/auth', authRoutes);
-app.use("/api/user", userRoutes);
-app.use("/api/admin",adminRoutes);
+// app.use('/api/auth', authRoutes);
+// app.use("/api/user", userRoutes);
+// app.use("/api/admin",adminRoutes);
+
+// Middleware
+app.use(bodyParser.json());
 
 // Root Endpoint
 app.get('/', (req, res) => {
