@@ -17,9 +17,9 @@ app.use(cors({ origin:"https://user-data-mern-assement-frontend.vercel.app/" }))
 app.use(cors());
 
 // Routes
-// app.use('/api/auth', authRoutes);
-// app.use("/api/user", userRoutes);
-// app.use("/api/admin",adminRoutes);
+app.use('/api/auth', authRoutes);
+app.use("/api/user", userRoutes);
+app.use("/api/admin",adminRoutes);
 
 // Middleware
 app.use(bodyParser.json());
@@ -31,9 +31,13 @@ app.get('/', (req, res) => {
 
 // Database Connection
 mongoose
-    .connect(MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => {
-        console.log('Database connected successfully');
-        app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
-    })
-    .catch((error) => console.error('Database connection error:', error));
+  .connect(MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    console.log("Database connected successfully");
+  })
+  .catch((error) => console.error("Database connection error:", error));
+
+// Start the server
+app.listen(PORT, () =>
+  console.log(`Server running on http://localhost:${PORT}`)
+);
