@@ -16,7 +16,7 @@ const MONGO_URL = process.env.MONGOURL;
 app.use(bodyParser.json());
 
 const allowedOrigins = [
-    "https://user-data-mern-assement-frontend-cl771fa34.vercel.app", // Your frontend URL
+    "https://user-data-mern-assement-frontend-cl771fa34.vercel.app", // Frontend domain
 ];
 
 app.use(
@@ -28,7 +28,7 @@ app.use(
                 callback(new Error("Not allowed by CORS"));
             }
         },
-        credentials: true, // Allow credentials like cookies, authorization headers
+        credentials: true, // Support cookies and headers like Authorization
     })
 );
 
