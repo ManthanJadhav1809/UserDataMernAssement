@@ -15,7 +15,7 @@ const MONGO_URL = process.env.MONGOURL;
 // Middleware
 app.use(bodyParser.json());
 
-app.use(cors({ origin: "https://user-data-mern-assement-frontend-cl771fa34.vercel.app" }));
+app.use(cors({ origin:"https://user-data-mern-assement-frontend-cl771fa34.vercel.app/AdminProfilePage" }));
 app.use(cors());
 
 // Routes
