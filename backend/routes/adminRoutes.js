@@ -4,33 +4,7 @@ const authMiddleware = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
-// Admin login
-// router.post("/login", async (req, res) => {
-//     const { email, password } = req.body;
-//     try {
-//       const user = await User.findOne({ email });
-  
-//       if (!user || user.role !== "admin") {
-//         return res.status(403).json({ message: "Access denied." });
-//       }
-  
-//       const isMatch = await bcrypt.compare(password, user.password);
-  
-//       if (!isMatch) {
-//         return res.status(401).json({ message: "Invalid credentials." });
-//       }
-  
-//       const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, {
-//         expiresIn: "1d",
-//       });
-  
-//       res.status(200).json({ token });
-//     } catch (err) {
-//       res.status(500).json({ error: "Login failed." });
-//     }
-//   });
-  
-//   get all user
+
 router.get("/users", async (req, res) => {
     const { page = 1, limit = 10, search = "", sort = "firstName", order = "asc" } = req.query;
   
