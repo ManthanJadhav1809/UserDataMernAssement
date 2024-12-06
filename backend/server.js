@@ -16,9 +16,10 @@ const MONGO_URL = process.env.MONGOURL;
 // app.use(cors());
 app.use(
   cors({
-    origin: "https://user-data-mern-assement-frontend.vercel.app",
-    methods: ["GET", "POST", "PUT","PATCH", "DELETE"],
-    credentials: true, // If your frontend sends cookies or requires credentials
+    origin: "https://user-data-mern-assement-frontend.vercel.app", // Allow only your frontend origin
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Specify allowed HTTP methods
+    allowedHeaders: ["Content-Type", "Authorization"], // Specify allowed headers
+    credentials: true, // Allow cookies or authorization headers
   })
 );
 
