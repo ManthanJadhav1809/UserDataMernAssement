@@ -85,7 +85,7 @@ router.post("/login", async (req, res) => {
 
    // Check if the user is blocked
    if (user.blocked) {
-    return res.status(403).json({ message: "Your account is blocked. Please contact support." });
+    return res.json({ message: "Your account is blocked. Please contact support." });
   }
 
   if (!user.isVerified) {
