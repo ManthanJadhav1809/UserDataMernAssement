@@ -100,16 +100,32 @@ router.post("/login", async (req, res) => {
 });
 
 // Forget Password
+// Forget Password
 router.post("/forgot-password", async (req, res) => {
   const { email } = req.body;
   const user = await User.findOne({ email });
-  if (!user) return res.status(404).json({ message: "User not found." });
+  
+  if (!user) {
+    return res.status(404).json({ message: "User not found." });
+  }
+
+  // Generate OTP
   const resetToken = Math.floor(100000 + Math.random() * 900000).toString();
+  
+  // Set OTP and its expiration time (valid for 10 minutes)
   user.otp = resetToken;
+  user.otpExpiresAt = Date.now() + 10 * 60 * 1000; // 10 minutes expiration
+  
+  // Save the OTP in the database
   await user.save();
+
+  // Send the OTP to the user's email
   await sendEmail(email, "Reset Password OTP", `Your OTP is ${resetToken}`);
+
+  // Respond to the user
   res.json({ message: "Password reset OTP sent to your email." });
 });
+
 
 // Change Password
 router.put("/change-password", async (req, res) => {

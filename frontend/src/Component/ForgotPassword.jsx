@@ -8,22 +8,29 @@ export default function ForgotPassword() {
   const [dis, setDis] = useState(false);
   const navigate = useNavigate();
 
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Check if the email is empty
     if (email.length === 0) {
       alert("Email is required");
       return;
     }
 
-   
+    // Check if the email is in a valid format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      alert("Please enter a valid email address");
+      return;
+    }
 
     try {
       setDis(true);
-      navigate(`/VerifyOtp/${email}`);
+      const res = await api.post("/api/auth/forgot-password", { email });
+      alert(res.data.message); // Success message
+      navigate(`/VerifyOtp/${email}`); // Navigate to the OTP verification page
     } catch (err) {
-      alert(err.response?.data?.error || "An error occurred");
+      alert(err.response?.data?.message || "An error occurred");
     } finally {
       setDis(false);
     }
