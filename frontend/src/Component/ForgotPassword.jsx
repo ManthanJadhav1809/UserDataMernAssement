@@ -10,32 +10,39 @@ export default function ForgotPassword() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     // Check if the email is empty
     if (email.length === 0) {
       alert("Email is required");
       return;
     }
-
+  
     // Check if the email is in a valid format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       alert("Please enter a valid email address");
       return;
     }
-
+  
     try {
       setDis(true);
       const res = await api.post("/api/auth/forgot-password", { email });
+      console.log(res.data);
       alert(res.data.message); // Success message
       navigate(`/VerifyOtp/${email}`); // Navigate to the OTP verification page
     } catch (err) {
-      alert(err.response?.data?.message || "An error occurred");
+      // Check for error response and message
+      let errorMessage =
+        err.response?.data?.message ;
+        if(err.response.statusText=="Not Found"){
+           errorMessage="user Not found please register";
+        }
+          alert(errorMessage);
     } finally {
       setDis(false);
     }
   };
-
+  
   return (
     <div className="auth-container">
       <div className="auth-box">

@@ -100,7 +100,6 @@ router.post("/login", async (req, res) => {
 });
 
 // Forget Password
-// Forget Password
 router.post("/forgot-password", async (req, res) => {
   const { email } = req.body;
   const user = await User.findOne({ email });
