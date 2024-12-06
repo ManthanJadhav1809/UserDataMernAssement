@@ -29,7 +29,7 @@ export default function VerifyOtp() {
       console.log(res);
       alert(res.data.message);
       localStorage.setItem("token", res.data.token);
-      navigate("/ProfilePage");
+      navigate("/");
     } catch (err) {
       alert(err.response?.data?.message || "Verification failed.");
     }
