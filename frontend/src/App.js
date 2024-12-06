@@ -21,7 +21,7 @@ function App() {
           <Route path="/AdminProfilePage" element={<AdminProfilePage></AdminProfilePage>}/> 
           <Route path="/VerifyOtp/:email" element={<VerifyOtp />} />
           <Route path="/ChangePassword" element={<ChangePassword />} />
-          <Route path="/forgot-password/:email" element={<ForgotPassword />} />
+          <Route path="/forgot-password/" element={<ForgotPassword />} />
           <Route path="/ProfilePage" element={<ProfilePage />} />
           <Route path="/update-profile" element={<UpdateProfilePage></UpdateProfilePage>}/>
         </Routes>

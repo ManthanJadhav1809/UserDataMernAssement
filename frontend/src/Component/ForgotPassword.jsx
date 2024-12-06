@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import api from "../api";
 import "./CSS/Auth.css";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 
 export default function ForgotPassword() {
-//   const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("");
  
   const navigate=useNavigate();
-  const {email}=useParams()
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -26,7 +25,7 @@ export default function ForgotPassword() {
         <form >
           <div className="input-group">
             <label>Email</label>
-            <input type="email"  value={email} required />
+            <input type="email"  onChange={()=>{setEmail(e.target.value)}}  required />
           </div>
           <button onClick={handleSubmit} className="auth-btn">Submit</button>
         </form>
