@@ -4,6 +4,10 @@ const authMiddleware = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
+router.get('/', (req, res) => {
+  res.send('Hello from user route!');
+});
+
 // Get Profile
 router.get("/profile", authMiddleware, async (req, res) => {
   try {

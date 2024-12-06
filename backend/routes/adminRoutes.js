@@ -4,6 +4,9 @@ const authMiddleware = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
+router.get('/', (req, res) => {
+  res.send('Hello from admin route!');
+});
 
 router.get("/users", async (req, res) => {
     const { page = 1, limit = 10, search = "", sort = "firstName", order = "asc" } = req.query;

@@ -6,6 +6,10 @@ const sendEmail = require("../utils/sendEmail");
 
 const router = express.Router();
 
+router.get('/', (req, res) => {
+  res.send('Hello from auth route!');
+});
+
 // Register
 router.post("/register", async (req, res) => {
   const { firstName,lastName, email, password } = req.body;
