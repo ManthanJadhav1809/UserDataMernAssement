@@ -12,14 +12,17 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const MONGO_URL = process.env.MONGOURL;
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-// app.use(cors());
+
+// CORS
 app.use(
   cors({
-    origin: "https://user-data-mern-assement-frontend.vercel.app", // Allow only your frontend origin
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Specify allowed HTTP methods
-    allowedHeaders: ["Content-Type", "Authorization"], // Specify allowed headers
-    credentials: true, // Allow cookies or authorization headers
+    origin: "https://user-data-mern-assement-frontend.vercel.app",
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
   })
 );
 
@@ -30,8 +33,12 @@ app.use('/api/auth', authRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/admin",adminRoutes);
 
-// Middleware
-app.use(bodyParser.json());
+app.use((req, res, next) => {
+  console.log("Request Method:", req.method);
+  console.log("Request Origin:", req.headers.origin);
+  console.log("Request Headers:", req.headers);
+  next();
+});
 
 // Root Endpoint
 app.get('/', (req, res) => {
