@@ -1,9 +1,7 @@
 import axios from "axios";
 
-// http://localhost:5000/
-// https://user-data-mern-assement-backend.vercel.app/
 const api = axios.create({
-  baseURL: "http://localhost:5000/",
+  baseURL: process.env.REACT_APP_API_BASE_URL, // Access the environment variable
 });
 
 api.interceptors.request.use((config) => {
