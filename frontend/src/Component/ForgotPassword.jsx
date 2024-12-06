@@ -25,7 +25,7 @@ export default function ForgotPassword() {
         <form >
           <div className="input-group">
             <label>Email</label>
-            <input type="email"  onChange={()=>{setEmail(e.target.value)}}  required />
+            <input type="email"  onChange={(e)=>{setEmail(e.target.value)}}  required />
           </div>
           <button onClick={handleSubmit} className="auth-btn">Submit</button>
         </form>

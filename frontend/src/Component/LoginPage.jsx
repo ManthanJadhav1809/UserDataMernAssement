@@ -49,7 +49,7 @@ export default function LoginPage() {
           </div>
           <button className="auth-btn">Submit</button>
         </form>
-        <p onClick={() => navigate(`/forgot-password/${userData.email || ""}`)} className="link-text">
+        <p onClick={() => navigate(`/forgot-password/`)} className="link-text">
   Forgot Password?
 </p>
 

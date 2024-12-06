@@ -15,16 +15,16 @@ const MONGO_URL = process.env.MONGOURL;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
+app.use(cors());
 // CORS
-app.use(
-  cors({
-    origin: "https://user-data-mern-assement-frontend.vercel.app",
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true,
-  })
-);
+// app.use(
+//   cors({
+//     origin: "https://user-data-mern-assement-frontend.vercel.app",
+//     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+//     allowedHeaders: ["Content-Type", "Authorization"],
+//     credentials: true,
+//   })
+// );
 
 app.options("*", cors());
 
