@@ -23,6 +23,7 @@ export default function RegisterPage() {
     }
   };
 
+
   return (
     <div className="auth-container">
       <div className="auth-box">
