@@ -13,8 +13,16 @@ const PORT = process.env.PORT || 5000;
 const MONGO_URL = process.env.MONGOURL;
 
 
-app.use(cors({ origin:"https://user-data-mern-assement-frontend.vercel.app/" }));
-app.use(cors());
+// app.use(cors());
+app.use(
+  cors({
+    origin: "https://user-data-mern-assement-frontend.vercel.app",
+    methods: ["GET", "POST", "PUT","PATCH", "DELETE"],
+    credentials: true, // If your frontend sends cookies or requires credentials
+  })
+);
+
+app.options("*", cors());
 
 // Routes
 app.use('/api/auth', authRoutes);
