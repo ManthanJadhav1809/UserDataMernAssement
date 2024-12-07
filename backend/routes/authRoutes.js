@@ -105,7 +105,7 @@ router.post("/forgot-password", async (req, res) => {
   try {
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(404).json({ message: "User not found." });
+      return res.json({ message: "User not found." });
     }
 
     // Generate OTP
@@ -124,7 +124,7 @@ router.post("/forgot-password", async (req, res) => {
     // Respond to the user
     res.json({ message: "Password reset OTP sent to your email." });
   } catch (err) {
-    res.status(500).json({ message: "Failed to send OTP.", error: err.message });
+    res.json({ message: "Failed to send OTP.", error: err.message });
   }
 });
 
@@ -149,8 +149,8 @@ router.put("/change-password", async (req, res) => {
     }
 
     // Update the password
-    console.log(newPassword);
-    user.password = await bcrypt.hash(newPassword, 10); // Hash the new password
+    // console.log(newPassword);
+    user.password = newPassword 
     user.otp = null; // Clear OTP
     user.otpExpiresAt = null; // Clear OTP expiration
     await user.save();

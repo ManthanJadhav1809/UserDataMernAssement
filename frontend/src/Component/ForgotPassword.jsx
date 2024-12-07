@@ -33,10 +33,8 @@ export default function ForgotPassword() {
     } catch (err) {
       // Check for error response and message
       let errorMessage =
-        err.response?.data?.message ;
-        if(err.response.status=="404"){
-           errorMessage="user Not found please register";
-        }
+        err.message ;
+
         console.log(err);
           alert(errorMessage);
     } finally {
