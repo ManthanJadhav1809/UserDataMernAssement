@@ -149,6 +149,7 @@ router.put("/change-password", async (req, res) => {
     }
 
     // Update the password
+    console.log(newPassword);
     user.password = await bcrypt.hash(newPassword, 10); // Hash the new password
     user.otp = null; // Clear OTP
     user.otpExpiresAt = null; // Clear OTP expiration

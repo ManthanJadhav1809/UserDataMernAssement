@@ -35,7 +35,8 @@ export default function ChangePassword() {
         ...formData,
       });
       alert(res.data.message);
-      navigate("/login"); // Navigate to login page
+      navigate("/"); // Navigate to login page
+      alert("login with email and new password");
     } catch (err) {
       alert(err.response?.data?.message || "Failed to change password.");
     }
@@ -78,7 +79,7 @@ export default function ChangePassword() {
           </div>
           <button className="auth-btn">Submit</button>
         </form>
-        <button onClick={handleResendOtp} className="auth-btn">
+        <button onClick={handleResendOtp} className="auth-btn" disabled={timeLeft > 0}>
           Resend OTP
         </button>
       </div>
