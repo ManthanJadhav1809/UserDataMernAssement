@@ -99,42 +99,65 @@ router.post("/login", async (req, res) => {
   // res.json({ message:"login done sucessfully"});
 });
 
-// Forget Password
+// forgot password
 router.post("/forgot-password", async (req, res) => {
   const { email } = req.body;
-  const user = await User.findOne({ email });
-  
-  if (!user) {
-    return res.status(404).json({ message: "User not found." });
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: "User not found." });
+    }
+
+    // Generate OTP
+    const resetToken = Math.floor(100000 + Math.random() * 900000).toString();
+
+    // Set OTP and its expiration time (valid for 3 minutes)
+    user.otp = resetToken;
+    user.otpExpiresAt = Date.now() + 3 * 60 * 1000;
+
+    // Save the OTP in the database
+    await user.save();
+
+    // Send the OTP to the user's email
+    await sendEmail(email, "Reset Password OTP", `Your OTP is ${resetToken}`);
+
+    // Respond to the user
+    res.json({ message: "Password reset OTP sent to your email." });
+  } catch (err) {
+    res.status(500).json({ message: "Failed to send OTP.", error: err.message });
   }
-
-  // Generate OTP
-  const resetToken = Math.floor(100000 + Math.random() * 900000).toString();
-  
-  // Set OTP and its expiration time (valid for 10 minutes)
-  user.otp = resetToken;
-  user.otpExpiresAt = Date.now() + 10 * 60 * 1000; // 10 minutes expiration
-  
-  // Save the OTP in the database
-  await user.save();
-
-  // Send the OTP to the user's email
-  await sendEmail(email, "Reset Password OTP", `Your OTP is ${resetToken}`);
-
-  // Respond to the user
-  res.json({ message: "Password reset OTP sent to your email." });
 });
+
 
 
 // Change Password
 router.put("/change-password", async (req, res) => {
   const { email, otp, newPassword } = req.body;
-  const user = await User.findOne({ email });
-  if (!user || user.otp !== otp) return res.status(400).json({ message: "Invalid OTP." });
-  user.password = newPassword;
-  user.otp = null;
-  await user.save();
-  res.json({ message: "Password updated successfully." });
+  try {
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found." });
+    }
+
+    // Validate OTP and its expiration time
+    if (!user.otp || user.otp !== otp) {
+      return res.status(400).json({ message: "Invalid OTP." });
+    }
+    if (Date.now() > user.otpExpiresAt) {
+      return res.status(400).json({ message: "OTP has expired. Please request a new OTP." });
+    }
+
+    // Update the password
+    user.password = await bcrypt.hash(newPassword, 10); // Hash the new password
+    user.otp = null; // Clear OTP
+    user.otpExpiresAt = null; // Clear OTP expiration
+    await user.save();
+
+    res.json({ message: "Password updated successfully." });
+  } catch (err) {
+    res.status(500).json({ message: "Failed to change password.", error: err.message });
+  }
 });
 
 module.exports = router;

@@ -20,7 +20,7 @@ function App() {
           <Route path="/Adminlogin" element={<AdminLogin></AdminLogin>}/>
           <Route path="/AdminProfilePage" element={<AdminProfilePage></AdminProfilePage>}/> 
           <Route path="/VerifyOtp/:email" element={<VerifyOtp />} />
-          <Route path="/ChangePassword" element={<ChangePassword />} />
+          <Route path="/change-password/:email" element={<ChangePassword />} />
           <Route path="/forgot-password/" element={<ForgotPassword />} />
           <Route path="/ProfilePage" element={<ProfilePage />} />
           <Route path="/update-profile" element={<UpdateProfilePage></UpdateProfilePage>}/>

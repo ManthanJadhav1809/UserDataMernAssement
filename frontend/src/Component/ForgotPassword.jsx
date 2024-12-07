@@ -29,14 +29,15 @@ export default function ForgotPassword() {
       const res = await api.post("/api/auth/forgot-password", { email });
       console.log(res.data);
       alert(res.data.message); // Success message
-      navigate(`/VerifyOtp/${email}`); // Navigate to the OTP verification page
+      navigate(`/change-password/${email}`); // Navigate to the OTP verification page
     } catch (err) {
       // Check for error response and message
       let errorMessage =
         err.response?.data?.message ;
-        if(err.response.statusText=="Not Found"){
+        if(err.response.status=="404"){
            errorMessage="user Not found please register";
         }
+        console.log(err);
           alert(errorMessage);
     } finally {
       setDis(false);
