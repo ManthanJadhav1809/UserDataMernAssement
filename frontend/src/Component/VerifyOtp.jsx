@@ -4,7 +4,7 @@ import api from "../api";
 
 export default function VerifyOtp() {
   const [otp, setOtp] = useState("");
-  const [timeLeft, setTimeLeft] = useState(600); // 10 minutes
+  const [timeLeft, setTimeLeft] = useState(180); // 3 minutes
   const navigate = useNavigate();
   
   const {email}=useParams();
@@ -40,7 +40,7 @@ export default function VerifyOtp() {
     try {
       await api.post("/api/auth/resend-otp", { email });
       alert("New OTP has been sent to your email.");
-      setTimeLeft(600); // Reset timer
+      setTimeLeft(180); // Reset timer
     } catch (err) {
       alert(err.response?.data?.message || "Failed to resend OTP.");
     }

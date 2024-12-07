@@ -16,7 +16,7 @@ router.post("/register", async (req, res) => {
   try {
     const user = new User({ firstName,lastName, email, password });
     user.otp = Math.floor(100000 + Math.random() * 900000).toString();
-    user.otpExpiresAt = Date.now() + 10 * 60 * 1000; // 10 minutes from now
+    user.otpExpiresAt = Date.now() + 3 * 60 * 1000; // 10 minutes from now
     await user.save();
     
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
@@ -64,7 +64,7 @@ router.post("/resend-otp", async (req, res) => {
   }
 
   user.otp = Math.floor(100000 + Math.random() * 900000).toString();
-  user.otpExpiresAt = Date.now() + 10 * 60 * 1000; // 10 minutes
+  user.otpExpiresAt = Date.now() + 3 * 60 * 1000; // 10 minutes
   await user.save();
 
   await sendEmail(email, "Resend OTP", `Your new OTP is ${user.otp}`);
